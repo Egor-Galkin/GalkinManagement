@@ -1,0 +1,23 @@
+﻿<Window x:Class="ManagementWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManagementWpfApp"
+        mc:Ignorable="d"
+        Title="Главное окно" Height="550" Width="900" MinHeight="550" MinWidth="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource ColorSecondary}"/>
+        <Grid Grid.Row="2" Background="{StaticResource ColorSecondary}"/>
+        <Image Source="/Resources/logo.png" Width="100" HorizontalAlignment="Left"/>
+        <Button Content="Назад" HorizontalAlignment="Right" Name="ButtonBack" Command="{Binding BackCommand}" Visibility="{Binding BackButtonVisibility}" Grid.Row="0" Margin="10,10,20,10"/>
+        <TextBlock Style="{StaticResource BlockHeader}" Text="{Binding PageTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
+        <Frame x:Name="FrameMain" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+    </Grid>
+</Window>

@@ -1,0 +1,62 @@
+﻿<Page x:Class="ManagementWpfApp.Views.TasksPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ManagementWpfApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="Задачи">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding Missions}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{StaticResource ColorAccent}" BorderThickness="1" CornerRadius="5" Padding="5" Background="{Binding BackColor}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="350"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding Name}" HorizontalAlignment="Center" FontWeight="Bold" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding CreationDate, StringFormat='Дата: {0:dd.MM.yyyy}'}" HorizontalAlignment="Left" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding CompletedStatus, StringFormat='Статус: {0}'}" HorizontalAlignment="Left" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding AuthorNickname, StringFormat='Автор: {0}'}" HorizontalAlignment="Left" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding PerformerNickname, StringFormat='Испонитель: {0}'}" HorizontalAlignment="Left" />
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="50" VerticalContentAlignment="Top">
+                                    <TextBlock Style="{StaticResource BlockCommon}" Text="{Binding Description}" HorizontalAlignment="Left" TextWrapping="Wrap" Width="auto" />
+                                </ScrollViewer>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                                <Button Width="300" Content="Редактировать" 
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                        CommandParameter="{Binding}" Visibility="{Binding AdminControlsVisibility}" />
+                                <Button Width="300" Content="Удалить" 
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                        CommandParameter="{Binding}" Visibility="{Binding AdminControlsVisibility}" />
+                                <Button Width="300" Content="Выполнить" 
+                                        Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                        CommandParameter="{Binding}" IsEnabled="{Binding CompleteControlsIsEnabled}" Visibility="{Binding UserControlsVisibility}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Content="Пользователи" Command="{Binding NavigateUsersCommand}" HorizontalAlignment="Left" Visibility="{Binding UsersButtonVisibility}" />
+        <Button Grid.Row="1" Content="Добавить" Command="{Binding AddCommand}" HorizontalAlignment="Right" Visibility="{Binding AddButtonVisibility}" />
+    </Grid>
+</Page>

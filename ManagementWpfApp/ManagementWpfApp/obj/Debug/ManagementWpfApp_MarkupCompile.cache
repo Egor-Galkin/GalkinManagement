@@ -1,0 +1,20 @@
+﻿ManagementWpfApp
+
+
+winexe
+C#
+.cs
+D:\Технарь\Курс Skillbox\ТЗ Ангстрем\final\ManagementWpfApp\ManagementWpfApp\obj\Debug\
+ManagementWpfApp
+none
+false
+DEBUG;TRACE
+D:\Технарь\Курс Skillbox\ТЗ Ангстрем\final\ManagementWpfApp\ManagementWpfApp\App.xaml
+61452750171
+3361264115
+27623932171
+52364569406
+MainWindow.xaml;Views\LoginPage.xaml;Views\TaskEditPage.xaml;Views\TasksPage.xaml;Views\UserEditPage.xaml;Views\UsersPage.xaml;
+
+True
+

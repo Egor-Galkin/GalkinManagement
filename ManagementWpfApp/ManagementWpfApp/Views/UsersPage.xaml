@@ -1,0 +1,57 @@
+﻿<Page x:Class="ManagementWpfApp.Views.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ManagementWpfApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="Пользователи">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="Поиск: " />
+            <TextBox Width="300" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <ListView Grid.Row="1" ItemsSource="{Binding Users}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{StaticResource ColorAccent}" BorderThickness="1" CornerRadius="5" Padding="5" Background="{Binding BackColor}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding Nickname}" HorizontalAlignment="Left" FontWeight="Bold" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding Login, StringFormat='Логин: {0}'}" HorizontalAlignment="Left" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding Password, StringFormat='Пароль: {0}'}" HorizontalAlignment="Left" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding Role.Name, StringFormat='Роль: {0}'}" HorizontalAlignment="Left" />
+                                <TextBlock Width="auto" Style="{StaticResource BlockCommon}" Text="{Binding UsingCount, StringFormat='Задачи: {0}'}" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                                <Button Content="Редактировать" 
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                        CommandParameter="{Binding}" />
+                                <Button Content="Удалить" 
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                        CommandParameter="{Binding}" IsEnabled="{Binding DeleteControlsIsEnabled}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="2" Content="Добавить" Command="{Binding AddCommand}" HorizontalAlignment="Right" Margin="5" />
+    </Grid>
+</Page>
